@@ -24,7 +24,7 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
   your browser</a> to improve your experience.</p>
 <![endif]-->
-<div layout="row" ng-controller="IndexController" style="overflow: hidden;height:100%;">
+<div layout="row" ng-controller="IndexController as IC" style="overflow: hidden;height:100%;">
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
               md-component-id="left"
               style="background-color:#4DD0E1;"
@@ -32,7 +32,7 @@
     <md-toolbar layout="row" class="md-whiteframe-z1">
       <div class="md-toolbar-tools">
         <md-button class="md-icon-button" hide-gt-sm aria-label="Show Menu">
-          <ng-md-icon icon="{{menuIcon}}" style="fill:white;vertical-align:middle;" ng-click="menuToggle()"
+          <ng-md-icon icon="{{IC.menuIcon}}" style="fill:white;vertical-align:middle;" ng-click="menuToggle()"
                       hide-gt-sm></ng-md-icon>
         </md-button>
         <h2 style="color:white;">ANGULAR MATERIAL</h2>
@@ -50,7 +50,7 @@
       </md-list-item>
       <md-divider></md-divider>
       <md-list-item ng-repeat="item in menuItems" ng-click="go(item.path,item.name);menuToggle();">
-        <p style="font-size:18px;color:white;">{{item.name | uppercase}}</p>
+        <p style="font-size:18px;color:white;">{{IC.item.name | uppercase}}</p>
       </md-list-item>
     </md-list>
 
@@ -60,10 +60,10 @@
       <md-toolbar layout="row" class="md-whiteframe-z1 md-primary md-hue-2">
         <div class="md-toolbar-tools">
           <md-button class="md-icon-button" hide-gt-sm aria-label="Show Menu">
-            <ng-md-icon icon="{{menuIcon}}" style="fill:white;" ng-click="menuToggle()"></ng-md-icon>
+            <ng-md-icon icon="{{IC.menuIcon}}" style="fill:white;" ng-click="menuToggle()"></ng-md-icon>
           </md-button>
           <h1 flex layout-align="center center" style="color:white;">
-            <span>{{title | uppercase}}</span>
+            <span>{{IC.title | uppercase}}</span>
           </h1>
           <a href="https://github.com/mattspaulding/angular-material-kitchen-sink">
             <ng-md-icon icon="github-circle" size="48" style="fill:white;display: inline;"></ng-md-icon>

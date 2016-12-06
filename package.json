@@ -1,7 +1,9 @@
 {
   "name": "angularMaterialKitchenSink",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-install": "^0.6.0"
+  },
   "scripts": {
     "test": "gulp test",
     "deploy-demo": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages"

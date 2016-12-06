@@ -3,11 +3,15 @@
 
   angular
     .module('angularMaterialKitchenSink')
-    .controller('IndexController', IndexController);
+    .controller('IndexController', IndexController );
 
   /** @ngInject */
-  function IndexController($scope, $mdSidenav, $state) {
-    $scope.menuItems = [
+
+
+
+  function IndexController($mdSidenav, $state) {
+    var vm = this;
+    vm.menuItems = [
       {name: 'autocomplete', path: 'autocomplete'},
      // {name: 'bottom sheet', path: 'bottomSheet'},
       {name: 'button', path: 'button'}
@@ -21,29 +25,29 @@
       // {name: 'whiteframe', path: 'whiteframe'},
     ];
 
-    $scope.title = 'home';
+    vm.title = 'home';
 
-    $scope.go = function (path, title) {
+    vm.go = function (path, title) {
       $state.go(path);
-      $scope.title = title;
+      vm.title = title;
     }
 
-    $scope.toggleLeft = function () {
+    vm.toggleLeft = function () {
       $mdSidenav('left')
         .toggle();
     }
 
-    $scope.menuIcon = 'menu';
-    $scope.menuToggle = function () {
+    vm.menuIcon = 'menu';
+    vm.menuToggle = function () {
       if ($mdSidenav('left').isOpen()) {
         $mdSidenav('left')
           .close();
-        $scope.menuIcon = 'menu';
+        vm.menuIcon = 'menu';
       }
       else {
         $mdSidenav('left')
           .open();
-        $scope.menuIcon = 'arrow_back';
+        vm.menuIcon = 'arrow_back';
       }
     }
   }
