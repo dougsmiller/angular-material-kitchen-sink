@@ -9,7 +9,7 @@
 
 
 
-  function IndexController($mdSidenav, $state) {
+  function IndexController($scope,$mdSidenav, $state ,$log) {
     var vm = this;
     vm.menuItems = [
       {name: 'autocomplete', path: 'autocomplete'},
@@ -24,8 +24,12 @@
       // {name: 'toast', path: 'toast'},
       // {name: 'whiteframe', path: 'whiteframe'},
     ];
-
-    vm.title = 'home';
+  $log.info("Here and there")
+   vm.logout = function(){
+    alert("Fred");
+  }
+    $log.info("Here and there and everywhere")
+    vm.title = 'homex';
 
     vm.go = function (path, title) {
       $state.go(path);

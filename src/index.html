@@ -32,25 +32,24 @@
     <md-toolbar layout="row" class="md-whiteframe-z1">
       <div class="md-toolbar-tools">
         <md-button class="md-icon-button" hide-gt-sm aria-label="Show Menu">
-          <ng-md-icon icon="{{IC.menuIcon}}" style="fill:white;vertical-align:middle;" ng-click="menuToggle()"
+          <ng-md-icon icon="{{IC.menuIcon}}" style="fill:white;vertical-align:middle;" ng-click="IC.menuToggle()"
                       hide-gt-sm></ng-md-icon>
         </md-button>
         <h2 style="color:white;">ANGULAR MATERIAL</h2>
       </div>
     </md-toolbar>
-
     <md-list>
-      <md-list-item ng-click="go('home','home');menuToggle();">
+      <md-list-item ng-click="IC.go('home','home');menuToggle();">
         <i class="material-icons" style="color:white;">home</i>
         <p style="font-size:18px;color:white;">HOME</p>
       </md-list-item>
-      <md-list-item ng-click="go('tech','tech');menuToggle();">
+      <md-list-item ng-click="IC.go('tech','tech');menuToggle();">
         <i class="material-icons" style="color:white;">&#xE87C;</i>
         <p style="font-size:18px;color:white;">TECH</p>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item ng-repeat="item in menuItems" ng-click="go(item.path,item.name);menuToggle();">
-        <p style="font-size:18px;color:white;">{{IC.item.name | uppercase}}</p>
+      <md-list-item ng-repeat="item in  IC.menuItems" ng-click="IC.go(item.path,item.name);menuToggle();">
+        <p style="font-size:18px;color:white;">{{item.name | uppercase}}</p>
       </md-list-item>
     </md-list>
 
