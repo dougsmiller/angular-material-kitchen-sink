@@ -6,19 +6,21 @@
     .service('vendMachine', vendMachine);
 
   /** @ngInject */
-  function vendMachine() {
+  function vendMachine($window) {
 
-  var vm = this;
-/*
-  vm.change = change;
-  vm.coins = coins;
-  vm.weights = weights;
-*/
+var vm = this;
+
+  vm.change = 0;
+  vm.coins = [100,50,20,10,5,2,1];
+  vm.weights = [1,1,1,1,1,1,1];
   return {
 
     getCoins: function(){
 
-      //alert("big Brother");
+     $window.alert("big Brother");
+    },
+    setWeights: function (w) {
+       this.weights = w;
     }
 
   }
