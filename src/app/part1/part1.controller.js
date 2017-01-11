@@ -5,68 +5,53 @@
     .module('angularMaterialKitchenSink')
     .controller('Part1Controller', Part1Controller);
 
-
   /** @ngInject */
-  function Part1Controller() {
+  function Part1Controller($timeout, $q) {
     var vm = this;
-
-    vm.title1 = 'Part1';
-    vm.number = '0';
-    vm.change ='0';
-
-    var  coins = [100,50,20,10,5,2,1];
-    vm.clear = function(){
-      vm.number=0;
-      vm.change=0;
-
+    // list of `state` value/display objects
+    vm.states        = loadAll();
+    vm.selectedItem  = null;
+    vm.searchText    = null;
+    vm.querySearch   = querySearch;
+    // ******************************
+    // Internal methods
+    // ******************************
+    /**
+     * Search for states... use $timeout to simulate
+     * remote dataservice call.
+     */
+    function querySearch (query) {
+      var results = query ? vm.states.filter( createFilterFor(query) ) : vm.states;
+      var deferred = $q.defer();
+      $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+      return deferred.promise;
     }
-
-    function minCoinDynamic(change,coins) {
-      var coinReq = []; // this will store the optimal solution
-      coinReq.length = change+1;
-      // for all the values -- from 0 to
-      // given amount.
-      var CC = []; // resets for every smaller problems
-      // and minimum in it is the optimal
-      // solution for the smaller problem.
-      CC.length = coins.length;
-      coinReq[0] = 0; // 0 coins are required to make the change for 0
-      // now solve for all the amounts
-      for (var amt = 1; amt <= change; amt++) {
-        for (var j = 0; j < CC.length; j++) {
-          CC[j] = -1;
-        }
-        // Now try taking every coin one at a time and fill the solution in
-        // the CC[]
-        for (j = 0; j < coins.length; j++) {
-          if (coins[j] <= amt) { // check if coin value is less than
-            // amount
-            CC[j] = coinReq[amt - coins[j]] + 1; // if available,
-            // select the
-            // coin and add
-            // 1 to solution
-            // of
-            // (amount-coin
-            // value)
-          }
-        }
-        //Now solutions for amt using all the coins is stored in CC[]
-//			take out the minimum (optimal) and store in coinReq[amt]
-        coinReq[amt] = -1;
-        for (j = 0; j < coins.length; j++) {
-          if (CC[j] > 0 && (coinReq[amt] == -1 || coinReq[amt] > CC[j])) {
-            coinReq[amt] = CC[j];
-          }
-        }
-      }
-      //return the optimal solution for amount
-      return coinReq[change];
-
+    /**
+     * Build `states` list of key/value pairs
+     */
+    function loadAll() {
+      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
+              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
+              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
+              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
+              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
+              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
+              Wisconsin, Wyoming';
+      return allStates.split(/, +/g).map( function (state) {
+        return {
+          value: state.toLowerCase(),
+          display: state
+        };
+      });
     }
-    vm.calculate = function(){
-      vm.number=minCoinDynamic(vm.change,coins)
-
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(state) {
+        return (state.value.indexOf(lowercaseQuery) === 0);
+      };
     }
-
   }
 })();
