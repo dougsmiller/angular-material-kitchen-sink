@@ -1,0 +1,45 @@
+<!--
+<md-content class="md-padding">
+
+  <div>{{part4.source}}</div>
+
+  <video width="640" height="320"  controls="controls" source src="{{part4.source | trustURL}}" >
+
+    Your browser does not support the video tag.
+  </video>
+ </md-content>
+-->
+
+
+<div layout="column" flex >
+  <video  width="640" height="480"    autoplay="autoplay" preload="auto">
+    <!--
+    <source src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" type="video/mp4"/>
+    -->
+    <source src=" https://ziller2.dyndns.org:8000/uploads/{{part4.source}}" type="video/webm"/>
+   <!-- <source src=" https://ziller2.dyndns.org:8000/uploads/5895b7e5d9cdc97c5ff8529f.webm" type="video/webm"/> -->
+  </video>
+
+  <div>
+    <br>
+    <br>
+    <div id="div1">
+      No Pyramids&nbsp<input type="text" size="2" ng-model= "part4.eulerParams.noPyramids">
+    </div>
+    <div id="div2">
+      freq Min&nbsp<input type="text" size="3" ng-model= "part4.eulerParams.freqMin" >
+    </div>
+    <div id="div3">
+      freq Max&nbsp<input type="text" size="3" ng-model= "part4.eulerParams.freqMax" >
+    </div>
+    <div id="div4">
+      Amplification&nbsp<input type="text" size="2" ng-model= "part4.eulerParams.amplification">
+    </div>
+
+
+    <button ng-click="part4.eulerAmpVideo()">Eulerian Amplification</button>
+
+  </div>
+
+
+</div>

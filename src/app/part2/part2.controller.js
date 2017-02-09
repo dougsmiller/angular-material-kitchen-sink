@@ -8,95 +8,54 @@
 
 
   /** @ngInject */
-  function Part2Controller() {
+  function Part2Controller($http,$log) {
+
     var vm = this;
 
-    vm.title1 = 'Part1';
-    vm.number = '0';
-    vm.change ='0';
+    vm.loadTable = function(){
 
-    var  coins = [100,50,20,10,5,2,1];
-    vm.clear = function(){
-      vm.number=0;
-      vm.change=0;
+      //var url = "http://localhost:8080/api/mail/data";
+      var url = "http://ziller2.dyndns.org:9080/api/mail/data";
+      //alert(url);
+
+      $http({
+        method: "GET",
+        url: url
+      }).then(function mySucces(response) {
+
+        vm.data = response.data;
+       // alert(JSON.stringify(response));
+
+      }, function myError(response) {
+
+       //alert(JSON.stringify(response));
+        vm.status = response.status;
+        alert(vm.status + " Error");
+      });
 
     }
-    function minCoinDynamic(amount,coins){
 
-      var S = [];
-      var N = [];
-      var V = [];
-      var P = [];
-
-
-      for (var i = 1;i<= amount;i++){
-        S[i] = -1;
+    vm.listOptions = {
+      title: "Video Campaigns",
+      noDataMessage: "You have no campaigns within this time range.",
+      columns: {
+        "Campaign Name": "item.campaign",
+        "Name": "item.name",
+        "Email": "item.email",
+        "Question": "item.question",
+        "Duration": "item.duration",
+        "Date Sent": "item.created_at",
+        "Date Received ": "item.received"
       }
-      S[0] = 0;
+    };
 
-// go through all the coins
-
-      for (var k = 0;k < coins.length;k++){
-        var p = 1;
-        do{
-
-
-// add a coin for all solved  till less or equal to the amount
-
-          for (i = 0 ; i < amount;i++){
-
-            if (S[i] != -1){
-
-              var na = i + p * coins[k];
-
-              if ( S[na] === -1 || S[na] > S[i] + p ){
-
-                S[na] = S[i] + p;
-
-                N[na] = p; V[na] = k; P[na] = i
-
-
-              }
-            }
-
-          }
-
-          p++;
-
-        } while (p*coins[k] <=amount)
-      }
-
-      var usedCoins=[0,0,0,0,0,0,0];
-
-      var z = amount;
-     // var noCoins = S[amount];
-
-      do{
-
-        usedCoins[V[z]] = usedCoins[V[z]]+N[z];
-
-
-
-        z = P[z];
-
-
-
-      } while ( z!=0)
-
-
-
-
-
-      return usedCoins;
-    }
-
-
-    vm.calculate = function(){
-      vm.number=minCoinDynamic(vm.change,coins)
-
-    }
-
+    vm.loadTable();
   }
+
+
+
+
+
 })();
 
 

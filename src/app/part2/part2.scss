@@ -1,0 +1,36 @@
+.jn-list {
+  #scroll-container {
+    max-height: 200px;
+  }
+  md-list {
+    md-list-item {
+      box-sizing: border-box;
+      height: 40px;
+      padding-top: 10px;
+      border-bottom: 1px solid rgb(236, 236, 236);
+      &.md-no-proxy {
+        padding: 0;
+      }
+      &.no-data {
+        span {
+          width: 100% !important;
+        }
+      }
+      span {
+        font-size: 13px;
+        height: 100%;
+        display: inline-block;
+        &:last-child {
+          width: 48px;
+        }
+      }
+      &.list-header {
+        span {
+          height: auto;
+          font-size: 12px;
+          color: rgba(0, 0, 0, 0.54);
+        }
+      }
+    }
+  }
+}

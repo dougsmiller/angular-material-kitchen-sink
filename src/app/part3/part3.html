@@ -1,20 +1,28 @@
-<form class="calc">
-<p class="calc-display">
-  <input type="text" name="output" id="res" value="{{output}}" class="calc-display-input">
-</p>
-<p class="operators">
-  <button type="button" class="calc-button calc-button-red calc-button-big" ng-click='operate("/")' >coins</button>
-  <button type="button" class="calc-button calc-button-red calc-button-big" ng-click='operate("*")' >number</button>
-  <!--
-  <button type="button" class="calc-button calc-button-red calc-button-big" ng-click='operate("-")' >-</button>
-  <button type="button" class="calc-button calc-button-red calc-button-big" ng-click='operate("+")' >+</button>
-  -->
-</p>
-<p class="calc-row">
-  <button type="button" class="calc-button" ng-click="updateOutput($index)" ng-repeat="n in [0,1,2,3,4,5,6,7,8,9]">{{n}}</button>
-  <button type="button" class="calc-button" ng-click="updateOutput('.')">.</button>
-  <button type="button" class="calc-button" ng-click='output = 0'>C</button>
 
-</p>
-<p class="calc-row"><button type="button" class="calc-button calc-button-yellow calc-button-big" ng-click="equal()">calculate</button></p>
-</form>
+  <md-card class="jn-list">
+    <md-card-content>
+      <h3 class="md-title">{{part3.listOptions.title}}</h3>
+      <md-list ng-cloak>
+        <md-list-item class="list-header" layout="row">
+        <span ng-repeat="(k,v) in part3.listOptions.columns"
+              ng-style="{width: 100/5 + '%'}">{{k}}</span>
+        </md-list-item>
+        <md-virtual-repeat-container md-auto-shrink="true" id="scroll-container"
+                                     ng-show="part3.data && part3.data.length > 0"
+                                     ng-style="{height: (part3.data.length * 48) + 'px'}">
+          <md-list-item md-virtual-repeat="item in part3.data" layout="row">
+          <span ng-repeat="(k,v) in part3.listOptions.columns" ng-bind="{{v}}"
+                ng-style="{width: 100/5+ '%'}">
+          </span><button ng-click="part3.selectVideo(item._id)">View</button>
+          </md-list-item>
+        </md-virtual-repeat-container>
+        <md-list-item ng-if="part3.data && !part3.data.length" layout="row" class="no-data">
+          <span>{{part3.listOptions.noDataMessage}}</span>
+        </md-list-item>
+      </md-list>
+      <loading-spinner ng-if="loading"></loading-spinner>
+    </md-card-content>
+  </md-card>
+
+
+

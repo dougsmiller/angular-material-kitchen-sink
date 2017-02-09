@@ -1,24 +1,63 @@
 <div layout="column" ng-cloak="">
   <md-content class="md-padding">
     <form ng-submit="$event.preventDefault()" name="searchForm">
-      <p>The following example demonstrates autocomplete. Try typing a state.</p>
-      <div layout-gt-sm="row">
-        <md-input-container flex="">
-          <label>Name</label>
-          <input type="text">
-        </md-input-container>
-        <md-autocomplete flex="" required="" md-input-name="autocompleteField" md-input-minlength="2" md-input-maxlength="18" md-no-cache="autocomplete.noCache" md-selected-item="autocomplete.selectedItem" md-search-text="autocomplete.searchText" md-items="item in autocomplete.querySearch(autocomplete.searchText)" md-item-text="item.display" md-require-match="" md-floating-label="Favorite state">
-          <md-item-template>
-            <span md-highlight-text="autocomplete.searchText">{{item.display}}</span>
-          </md-item-template>
-          <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-            <div ng-message="required">You <b>must</b> have a favorite state.</div>
-            <div ng-message="md-require-match">Please select an existing state.</div>
-            <div ng-message="minlength">Your entry is not long enough.</div>
-            <div ng-message="maxlength">Your entry is too long.</div>
-          </div>
-        </md-autocomplete>
-      </div>
-    </form>
+      <md-content layout-padding>
+        <form name="projectForm">
+          <md-input-container class="md-block">
+            <label><b>Campaign</b></label>
+            <input required type="text" name="campaign" ng-model="part1.campaign"
+                   minlength="5" maxlength="30"  />
+            <div ng-messages="projectForm.campaign.$error" role="alert">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                Your Name must be between 5 and 30 characters.
+              </div>
+            </div>
+          </md-input-container>
+
+
+
+          <md-input-container class="md-block">
+            <label><b>Name</b></label>
+            <input required type="text" name="userName" ng-model="part1.name"
+                   minlength="1" maxlength="30"  />
+            <div ng-messages="projectForm.userNmae.$error" role="alert">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                Your Name must be between 11 and 30 characters.
+              </div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input required type="email" name="userEmail" ng-model="part1.email"
+                   minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+            <div ng-messages="projectForm.userEmail.$error" role="alert">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                Your E-mail must be between 10 and 100 characters long and should be a valid email address.
+              </div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Question</label>
+            <input required type="text" name="userQuestion" ng-model="part1.question"
+                   minlength="10" maxlength="200" />
+            <div ng-messages="projectForm.userEmail.$error" role="alert">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                Your Question must be between 10 and 200 characters long.
+              </div>
+            </div>
+          </md-input-container>
+          <label><b><h2>Video Duration</h2></b></label>
+
+          <md-radio-group ng-model="part1.time">
+
+              <md-radio-button value="1" class="md-primary">30-sec</md-radio-button>
+              <md-radio-button value="2"> 1 min</md-radio-button>
+              <md-radio-button value="3">2 min</md-radio-button>
+
+           </md-radio-group>
+
+          <button ng-click="part1.send()">Send</button>
+        </form>
   </md-content>
 </div>

@@ -1,18 +1,17 @@
-
 <md-card class="jn-list">
   <md-card-content>
     <h3 class="md-title">{{part2.listOptions.title}}</h3>
     <md-list ng-cloak>
       <md-list-item class="list-header" layout="row">
         <span ng-repeat="(k,v) in part2.listOptions.columns"
-              ng-style="{width: 100/7 + '%'}">{{k}}</span>
+              ng-style="{width: 100/9 + '%'}">{{k}}</span>
       </md-list-item>
       <md-virtual-repeat-container md-auto-shrink="true" id="scroll-container"
                                    ng-show="part2.data && part2.data.length > 0"
                                    ng-style="{height: (part2.data.length * 48) + 'px'}">
         <md-list-item md-virtual-repeat="item in part2.data" layout="row">
           <span ng-repeat="(k,v) in part2.listOptions.columns" ng-bind="{{v}}"
-                ng-style="{width: 100/7 + '%'}">
+                ng-style="{width: 100/9 + '%'}">
           </span>
         </md-list-item>
       </md-virtual-repeat-container>

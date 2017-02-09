@@ -14,10 +14,10 @@ var vm = this;
   vm.coins = [100,50,20,10,5,2,1];
   vm.weights = [1,1,1,1,1,1,1];
   return {
-
+    'weights':weights,
     getCoins: function(){
 
-     $window.alert("big Brother");
+  //   $window.alert("big Brother");
     },
     setWeights: function (w) {
        this.weights = w;
