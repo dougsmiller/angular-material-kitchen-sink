@@ -1,0 +1,28 @@
+
+  <md-card class="jn-list">
+    <md-card-content>
+      <h3 class="md-title">{{part3.listOptions.title}}</h3>
+      <md-list ng-cloak>
+        <md-list-item class="list-header" layout="row">
+        <span ng-repeat="(k,v) in part5.listOptions.columns"
+              ng-style="{width: 100/2 + '%'}">{{k}}</span>
+        </md-list-item>
+        <md-virtual-repeat-container md-auto-shrink="true" id="scroll-container"
+                                     ng-show="part5.data && part5.data.length > 0"
+                                     ng-style="{height: (part5.data.length * 48) + 'px'}">
+          <md-list-item md-virtual-repeat="item in part5.data" layout="row">
+          <span ng-repeat="(k,v) in part5.listOptions.columns" ng-bind="{{v}}"
+                ng-style="{width: 100/2+ '%'}">
+          </span><button ng-click="part5.selectTransformedVideo(item)">View</button>
+          </md-list-item>
+        </md-virtual-repeat-container>
+        <md-list-item ng-if="part5.data && !part5.data.length" layout="row" class="no-data">
+          <span>{{part5.listOptions.noDataMessage}}</span>
+        </md-list-item>
+      </md-list>
+      <loading-spinner ng-if="loading"></loading-spinner>
+    </md-card-content>
+  </md-card>
+
+
+

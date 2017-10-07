@@ -6,52 +6,36 @@
     .controller('Part1Controller', Part1Controller);
 
   /** @ngInject */
-  function Part1Controller($timeout, $q) {
+  function Part1Controller($http)
+  {
+
     var vm = this;
-    // list of `state` value/display objects
-    vm.states        = loadAll();
-    vm.selectedItem  = null;
-    vm.searchText    = null;
-    vm.querySearch   = querySearch;
-    // ******************************
-    // Internal methods
-    // ******************************
-    /**
-     * Search for states... use $timeout to simulate
-     * remote dataservice call.
-     */
-    function querySearch (query) {
-      var results = query ? vm.states.filter( createFilterFor(query) ) : vm.states;
-      var deferred = $q.defer();
-      $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-      return deferred.promise;
-    }
-    /**
-     * Build `states` list of key/value pairs
-     */
-    function loadAll() {
-      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-              Wisconsin, Wyoming';
-      return allStates.split(/, +/g).map( function (state) {
-        return {
-          value: state.toLowerCase(),
-          display: state
-        };
+
+    vm.email = "";
+    vm.time = "1";
+    vm.question="";
+    vm.name ="";
+    vm.campaign="";
+
+    vm.send = function () {
+
+    // '/mail/:to/name:/:campaign/:time/:question'
+      //var url = "http://localhost:8080/api/mail/"+vm.email+"/"+vm.name+"/"+vm.campaign+"/"+vm.time+"/"+vm.question;
+      var url = "http://ziller2.dyndns.org:9080/api/mail/"+vm.email+"/"+vm.name+"/"+vm.campaign+"/"+vm.time+"/"+vm.question;
+
+      alert(url);
+      $http({
+        method: "POST",
+        url: url
+      }).then(function mySucces(response) {
+        vm.response = response.data;
+        alert(angular.toJson(vm.response));
+      }, function myError(response) {
+        vm.status = response.statusText;
+       // alert(vm.status + " quack");
       });
+
     }
-    /**
-     * Create filter function for a query string
-     */
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(state) {
-        return (state.value.indexOf(lowercaseQuery) === 0);
-      };
-    }
+
   }
 })();

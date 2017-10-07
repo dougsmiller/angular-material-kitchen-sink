@@ -45,6 +45,19 @@
         controller: 'Part4Controller',
         controllerAs: 'part4'
       })
+      .state('part5', {
+        url: '/part5/:video',
+        templateUrl: 'app/part5/part5.html',
+        controller: 'Part5Controller',
+        controllerAs: 'part5'
+      })
+      .state('part6', {
+      url: '/part6/:video',
+      templateUrl: 'app/part6/part6.html',
+      controller: 'Part6Controller',
+      controllerAs: 'part6'
+    })
+
       .state('autocomplete', {
         url: '/autocomplete',
         templateUrl: 'app/autocomplete/autocomplete.html',
