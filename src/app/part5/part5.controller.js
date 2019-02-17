@@ -20,7 +20,7 @@ function Part5Controller($http,$state){
 
   vm.findVideos = function(){
 
-    var url = "http://ziller2.dyndns.org:9080/api/transformed";
+    var url = "/api/transformed";
 
    // var url = "http://localhost:8080/api/mail/videos";
 

@@ -15,7 +15,7 @@
     vm.loadTable = function(){
 
       //var url = "http://localhost:8080/api/mail/data";
-      var url = "http://ziller2.dyndns.org:9080/api/mail/data";
+      var url = "/api/mail/data";
       //alert(url);
 
       $http({
@@ -30,10 +30,10 @@
 
        //alert(JSON.stringify(response));
         vm.status = response.status;
-        alert(vm.status + " Error");
+        alert(vm.status + " <== Error");
       });
 
-    }
+    };
 
     vm.listOptions = {
       title: "Video Campaigns",

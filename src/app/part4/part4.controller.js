@@ -27,7 +27,7 @@
 
     vm.eulerAmpVideo = function () {
 
-      var url = "http://ziller2.dyndns.org:9080/api/euler" ;
+      var url = "/api/euler" ;
 
 
       $http({
