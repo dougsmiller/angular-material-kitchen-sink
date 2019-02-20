@@ -5,15 +5,20 @@
       <md-list ng-cloak>
         <md-list-item class="list-header" layout="row">
         <span ng-repeat="(k,v) in part3.listOptions.columns"
-              ng-style="{width: 100/5 + '%'}">{{k}}</span>
+              ng-style="{width: 100/6 + '%'}">{{k}}</span>
         </md-list-item>
         <md-virtual-repeat-container md-auto-shrink="true" id="scroll-container"
                                      ng-show="part3.data && part3.data.length > 0"
                                      ng-style="{height: (part3.data.length * 48) + 'px'}">
           <md-list-item md-virtual-repeat="item in part3.data" layout="row">
-          <span ng-repeat="(k,v) in part3.listOptions.columns" ng-bind="{{v}}"
-                ng-style="{width: 100/5+ '%'}">
-          </span><button ng-click="part3.selectVideo(item._id)">View</button>
+
+          <span ng-repeat="td in item" ng-style="{width: 100/6 + '%'}">{{td}}
+          </span>
+            <!--
+            <md-button class="md-primary md-raised" ng-click="part3.selectVideo(item[0])">View</md-button>
+            -->
+            <md-button class="md-primary md-raised" ng-click="part3.showTabDialog($event,item[0])">View</md-button>
+
           </md-list-item>
         </md-virtual-repeat-container>
         <md-list-item ng-if="part3.data && !part3.data.length" layout="row" class="no-data">

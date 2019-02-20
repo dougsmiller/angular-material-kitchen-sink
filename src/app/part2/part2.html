@@ -11,9 +11,12 @@
                                    ng-show="part2.data && part2.data.length > 0"
                                    ng-style="{height: (part2.data.length * 48) + 'px'}">
         <md-list-item md-virtual-repeat="item in part2.data" layout="row">
-          <span ng-repeat="(k,v) in part2.listOptions.columns" ng-bind="{{v}}"
-                ng-style="{width: 100/7 + '%'}">
+
+
+          <span ng-repeat="td in item" ng-style="{width: 100/7 + '%'}">{{td}}
           </span>
+
+
         </md-list-item>
       </md-virtual-repeat-container>
       <md-list-item ng-if="part2.data && !part2.data.length" layout="row" class="no-data">

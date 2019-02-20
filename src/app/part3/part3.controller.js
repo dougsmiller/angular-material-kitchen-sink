@@ -45,7 +45,9 @@ function Part3Controller($http,$state){
     noDataMessage: "You have no campaigns within this time range.",
     columns: {
       "Video": "item._id",
+      "Campaign":"item.campaign",
       "Name": "item.name",
+      "Email":"item.email",
       "Date Sent": "item.created_at",
       "Date Received ": "item.received"
 
@@ -55,12 +57,17 @@ function Part3Controller($http,$state){
 
  vm.selectVideo = function(video){
 
-
-   $state.go("part4",{"video": video+".webm"});
-
- }
+  alert("selected Video: " + video );
 
 
+ };
+  vm.selectVideo = function($event,video){
+
+    alert("selected Video: " + video );
+
+
+  };
+  
   vm.findVideos();
 
 

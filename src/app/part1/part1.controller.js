@@ -20,10 +20,10 @@
     vm.send = function () {
 
     // '/mail/:to/name:/:campaign/:time/:question'
-      //var url = "http://localhost:8080/api/mail/"+vm.email+"/"+vm.name+"/"+vm.campaign+"/"+vm.time+"/"+vm.question;
-      var url = "http://ziller2.dyndns.org:9080/api/mail/"+vm.email+"/"+vm.name+"/"+vm.campaign+"/"+vm.time+"/"+vm.question;
+      var url = "/api/mail/"+vm.email+"/"+vm.name+"/"+vm.campaign+"/"+vm.time+"/"+vm.question;
+     // var url = "http://ziller2.dyndns.org:9080/api/mail/"+vm.email+"/"+vm.name+"/"+vm.campaign+"/"+vm.time+"/"+vm.question;
 
-      alert(url);
+    //  alert(url);
       $http({
         method: "POST",
         url: url

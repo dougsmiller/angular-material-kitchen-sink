@@ -25,6 +25,7 @@
 
         vm.data = response.data;
        // alert(JSON.stringify(response));
+        console.log(response.data);
 
       }, function myError(response) {
 
