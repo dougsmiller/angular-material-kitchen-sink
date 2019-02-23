@@ -1,23 +1,24 @@
 
   <md-card class="jn-list">
-    <md-card-content>
+
       <h3 class="md-title">{{part3.listOptions.title}}</h3>
       <md-list ng-cloak>
         <md-list-item class="list-header" layout="row">
         <span ng-repeat="(k,v) in part3.listOptions.columns"
-              ng-style="{width: 100/6 + '%'}">{{k}}</span>
+              ng-style="{width: 100/5 + '%'}">{{k}}</span>
         </md-list-item>
         <md-virtual-repeat-container md-auto-shrink="true" id="scroll-container"
                                      ng-show="part3.data && part3.data.length > 0"
                                      ng-style="{height: (part3.data.length * 48) + 'px'}">
           <md-list-item md-virtual-repeat="item in part3.data" layout="row">
 
-          <span ng-repeat="td in item" ng-style="{width: 100/6 + '%'}">{{td}}
-          </span>
+          <span ng-repeat-start="td in item"  ng-if="$first"> </span>
+
+            <span ng-repeat-end="td in item" ng-style="{width: 100/6 + '%'}" ng-if="!$first">{{td}} </span>
             <!--
             <md-button class="md-primary md-raised" ng-click="part3.selectVideo(item[0])">View</md-button>
             -->
-            <md-button class="md-primary md-raised" ng-click="part3.showTabDialog($event,item[0])">View</md-button>
+            <md-button class="md-primary md-raised" ng-click="part3.showVideo(item[0])">View</md-button>
 
           </md-list-item>
         </md-virtual-repeat-container>
@@ -28,6 +29,53 @@
       <loading-spinner ng-if="loading"></loading-spinner>
     </md-card-content>
   </md-card>
+  <div class='md-padding' layout="row" layout-wrap>
+
+
+  <md-card flex="50">
+    <md-card-content>
+
+    <video controls id="video-1">
+      <source src="" type="video/webm" id="videoSrc" />
+
+    </video>
+    </md-card-content>
+  </md-card>
+    <md-card>
+      <md-card-content>
+        <mat-list>
+
+        <mat-list-item>
+          <md-button class="md-primary md-raised" ng-click="part3.transformMP4()">Webm -> mp4 </md-button>
+        </mat-list-item>
+
+          <mat-list-item>
+
+          <md-button class="md-primary md-raised" ng-click="part3.sendToAI()">Send To AI Interface </md-button>
+
+          </mat-list-item>
+          <br>
+          <mat-list-item>
+
+          <md-button class="md-primary md-raised" ng-click="part3.getJobs()">Get Jobs </md-button>
+
+        </mat-list-item>
+          <mat-list-item>
+
+            <md-button class="md-primary md-raised" ng-click="part3.getJobStatus()">Get Jobs </md-button>
+
+          </mat-list-item>
+
+          <mat-list-item>
+
+            <md-button class="md-primary md-raised" ng-click="part3.getJobStatus()">Get Job({{part3.job_id}}) Status </md-button>
+
+          </mat-list-item>
+        </mat-list>
 
 
 
+
+      </md-card-content>
+    </md-card>
+  </div>
