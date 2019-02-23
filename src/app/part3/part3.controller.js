@@ -122,6 +122,38 @@
   };
 
 
+
+
+  /*
+  *
+  *   JOB Results
+    *
+    * */
+
+    vm.getJobResults = function(){
+
+      var url = "/api/job_results/"+ vm.job_id;
+      $http({
+        method: "GET",
+        url: url
+      }).then(function mySucces(response) {
+
+        alert("Job Status : "+ response.data);
+
+
+      }, function myError(response) {
+        vm.status = response.status;
+        alert(vm.status + "ERROR");
+      });
+
+
+    };
+/*
+*
+*   JOB Status
+*
+* */
+
   vm.getJobStatus = function(){
 
     var url = "/api/job_status/"+ vm.job_id;
@@ -130,7 +162,7 @@
       url: url
     }).then(function mySucces(response) {
 
-      alert("Job Status : "+ response.data);
+      alert("Job Status : "+ response.data.status);
 
 
     }, function myError(response) {
