@@ -5,7 +5,7 @@
     .module('angularMaterialKitchenSink')
     .controller('Part3Controller',Part3Controller);
 
-  function Part3Controller($http,$state){
+  function Part3Controller($http,$state,$mdToast,$timeout,$log){
 
 
 
@@ -13,13 +13,99 @@
     // finds video files
     vm.data = [];
 
+
 //alert("part3");
 
     vm.job_id = "XXX";
 
+    vm.showToast = function(msg) {
+
+
+      $mdToast.show (
+        $mdToast.simple()
+          .textContent(msg)
+          .hideDelay(1500)
+          .position('top right')
+      );
+    };
+/*
+*
+*
+* Process Video One Click
+*
+*
+* */
+    vm.processVideoOneClick = function(){
+      if (!!vm.video) {
+
+        vm.showToast("Transforming to MP4");
+        var url = "/api/mp4/" + vm.video;
+
+         $http({
+          method: "GET",
+          url: url
+        })
+          .then(function mySuccess(response) {
+
+          vm.showToast("transformed to mp4");
+          var url = "/api/ai/" + vm.video;
+
+          return  $http({
+            method: "GET",
+            url: url
+          })
+        })
+          .then(function (response){
+
+            vm.showToast(" Received ID from AI portal    " + response.data);
+
+            vm.job_id = response.data;
+
+            vm.startTimer(15000);
+        //Start timer to look at status
+
+
+          })
+          .catch(function(error) {
+          // this catches errors from the $http calls as well as from the explicit throw
+            vm.showToast("An error occured: " + error);
+
+
+        })
+
+
+      }else{
+
+        vm.showToast(vm.status + "No Video selected");
+      }
 
 
 
+  };
+
+    /**
+     *
+     * StartTimer
+     *
+     *
+     */
+    vm.startTimer = function(interval){
+      //alert("Starting timer ......"+interval);
+      $timeout(vm.getJobStatusRepeat,interval);
+
+
+    };
+
+
+
+
+
+    /**
+     *
+     * Find Videos
+     *
+     *
+     */
     vm.findVideos = function(){
 
      // var url = "http://ziller2.dyndns.org:9080/api/mail/videos";
@@ -36,7 +122,7 @@
 
       }, function myError(response) {
         vm.status = response.status;
-        alert(vm.status + "ERROR");
+        vm.showToast(vm.status + "ERROR");
       });
 
     };
@@ -55,26 +141,45 @@
 
       }
     };
+/*
+*
+* return Transformed
+*
+*
+* */
 
   vm.transformMP4 = function(){
 
-    var url = "/api/mp4/" +  vm.video;
-    $http({
-      method: "GET",
-      url: url
-    }).then(function mySucces(response) {
-
-    alert("transformed to mp4");
+    if (!!vm.video) {
+      //foo is defined
 
 
-    }, function myError(response) {
-      vm.status = response.status;
-      alert(vm.status + "ERROR");
-    });
+      vm.showToast("Transforming to MP4");
+      var url = "/api/mp4/" + vm.video;
+      $http({
+        method: "GET",
+        url: url
+      }).then(function mySucces(response) {
 
+        vm.showToast("transformed to mp4");
+
+
+      }, function myError(response) {
+        vm.status = response.status;
+        vm.showToast("ERROR" + vm.status );
+      });
+    }
+    else{
+      vm.showToast("No video selected");
+
+    }
 
   };
-
+    /**
+     *
+     *
+     *
+     */
   vm.sendToAI = function(){
 
     var url = "/api/ai/" + vm.video;
@@ -87,11 +192,11 @@
 
       vm.job_id = response.data;
 
-      alert("received from AI interface: Job ID is " + vm.job_id);
+      vm.showToast("received from AI interface: Job ID is " + vm.job_id);
 
     }, function myError(response) {
       vm.status = response.status;
-      alert(vm.status + "ERROR");
+      vm.showToast(vm.status + "ERROR");
     });
 
 
@@ -111,12 +216,12 @@
       url: url
     }).then(function mySucces(response) {
 
-      alert("Jobs are: "+ response.data);
+      vm.showToast("Jobs are: "+ response.data);
 
 
     }, function myError(response) {
       vm.status = response.status;
-      alert(vm.status + "ERROR");
+      vm.showToast(vm.status + "ERROR");
     });
 
   };
@@ -138,12 +243,12 @@
         url: url
       }).then(function mySucces(response) {
 
-        alert("Job Status : "+ response.data);
+        alert("Job Results : "+ response.data);
 
 
       }, function myError(response) {
         vm.status = response.status;
-        alert(vm.status + "ERROR");
+        vm.showToastt(vm.status + "ERROR");
       });
 
 
@@ -162,17 +267,71 @@
       url: url
     }).then(function mySucces(response) {
 
-      alert("Job Status : "+ response.data.status);
 
+      vm.showToast("Job Status : "+ response.data.status);
+      vm.poll_again_after_seconds = response.data.poll_again_after_seconds;
+      $log.info("polling after",vm.poll_again_after_seconds);
 
     }, function myError(response) {
       vm.status = response.status;
-      alert(vm.status + "ERROR");
+      vm.showToast(vm.status + "ERROR");
     });
 
 
     };
 
+    /**
+     *
+     * StartTimer
+     *
+     *
+     */
+    vm.startTimer = function(interval){
+      $log.info("Starting timer ......",interval);
+      $timeout(vm.getJobStatusRepeat,interval);
+
+
+    };
+
+
+    /*
+    *
+    *   JOB Status
+      *
+      * */
+// lazy coding do properly later
+    vm.getJobStatusRepeat = function(){
+
+      var url = "/api/job_status/"+ vm.job_id;
+      $http({
+        method: "GET",
+        url: url
+      }).then(function mySucces(response) {
+
+        //alert("poll again is "+ response.data.poll_again_after_seconds);
+        vm.showToast("Job Status : "+ response.data.status);
+        vm.poll_again_after_seconds = response.data.poll_again_after_seconds * 1000;
+        $log.info("polling after",vm.poll_again_after_seconds);
+        //alert("polling after"+ vm.poll_again_after_seconds);
+        if (vm.poll_again_after_seconds != 0){
+
+          vm.startTimer(vm.poll_again_after_seconds);
+
+        }else if(response.data.status === 'finished'){
+
+          vm.showToast("Getting Data");
+          vm.getJobResults();
+
+        }
+
+
+      }, function myError(response) {
+        vm.status = response.status;
+        vm.showToast(vm.status + "ERROR");
+      });
+
+
+    };
 
     vm.showVideo = function(video) {
       vm.video = video;

@@ -34,7 +34,9 @@
 
   <md-card flex="50">
     <md-card-content>
-
+    Video: {{part3.video}}
+      <br>
+      <br>
     <video controls id="video-1">
       <source src="" type="video/webm" id="videoSrc" />
 
@@ -44,10 +46,14 @@
     <md-card>
       <md-card-content>
         <mat-list>
-
+          <mat-list-item>
+            <md-button class="md-primary md-raised" ng-click="part3.processVideoOneClick()">Process Video One Click</md-button>
+          </mat-list-item>
+          <br>
         <mat-list-item>
           <md-button class="md-primary md-raised" ng-click="part3.transformMP4()">Webm -> mp4 </md-button>
         </mat-list-item>
+          <br>
 
           <mat-list-item>
 
@@ -60,13 +66,13 @@
           <md-button class="md-primary md-raised" ng-click="part3.getJobs()">Get Jobs </md-button>
 
         </mat-list-item>
-
-
+          <br>
           <mat-list-item>
 
             <md-button class="md-primary md-raised" ng-click="part3.getJobStatus()">Get Job({{part3.job_id}}) Status </md-button>
 
           </mat-list-item>
+          <br>
           <mat-list-item>
 
             <md-button class="md-primary md-raised" ng-click="part3.getJobResults()">Get Job Results </md-button>
