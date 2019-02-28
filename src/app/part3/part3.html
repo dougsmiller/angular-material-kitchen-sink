@@ -37,9 +37,9 @@
     Video: {{part3.video}}
       <br>
       <br>
-    <video controls id="video-1">
+    <video controls id="video-1" preload="metadata">
       <source src="" type="video/webm" id="videoSrc" />
-
+      <track label="English" kind="subtitles" srclang="en" src="" id="video-1-track">default>
     </video>
     </md-card-content>
   </md-card>
@@ -75,7 +75,13 @@
           <br>
           <mat-list-item>
 
-            <md-button class="md-primary md-raised" ng-click="part3.getJobResults()">Get Job Results </md-button>
+            <md-button class="md-primary md-raised" ng-click="part3.setJobID()">Update job ID </md-button>
+
+          </mat-list-item>
+          <br>
+          <mat-list-item>
+
+            <md-button class="md-primary md-raised" ng-click="part3.playVTT()">Play with sub titles (vtt)</md-button>
 
           </mat-list-item>
         </mat-list>
