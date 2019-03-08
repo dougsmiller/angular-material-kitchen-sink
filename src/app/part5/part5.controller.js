@@ -5,11 +5,16 @@
     .module('angularMaterialKitchenSink')
     .controller('Part5Controller',Part5Controller);
 
-function Part5Controller($http,$state){
+function Part5Controller($http,$state,localStorageService){
 
   var vm = this;
   // finds video files
   vm.data = [];
+
+  vm.setVideoServer = function(){
+
+    localStorageService.add('localVideoServer',vm.videoServer);
+  };
 
 //alert("part3");
 

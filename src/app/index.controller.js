@@ -15,7 +15,8 @@
       {name: 'Send Invite', path: 'part1'},
       {name: 'Invites Sent', path: 'part2'},
       {name: 'Videos Received', path: 'part3'},
-      {name: 'Videos Transformed', path: 'part5'}
+      {name: 'Videos Transformed', path: 'part4'},
+      {name: 'Local Setup', path: 'part5'}
      // {name: 'bottom sheet', path: 'bottomSheet'},
      // {name: 'button', path: 'button'}
       // {name: 'card', path: 'card'},

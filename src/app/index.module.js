@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angularMaterialKitchenSink', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ui.router', 'ngMaterial','ngMdIcons', 'toastr'])
+    .module('angularMaterialKitchenSink', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ui.router', 'ngMaterial','ngMdIcons', 'toastr','LocalStorageModule'])
     .directive('jnList', [
         function()  {
         return {

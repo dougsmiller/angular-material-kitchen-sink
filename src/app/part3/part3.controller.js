@@ -4,11 +4,24 @@
     .module('angularMaterialKitchenSink')
     .controller('Part3Controller', Part3Controller);
 
-  function Part3Controller($http, $state, $mdToast, $timeout, $log) {
+  function Part3Controller($http, $state, $mdToast, $timeout, $log,localStorageService) {
     var vm = this;
     // finds video files
     vm.data = [];
     //alert("part3");
+
+    if(!localStorageService.isSupported) {
+      //...
+      alert("We do not have local Storage!!");
+
+    }
+
+
+   var localVideoServer =  localStorageService.get('localVideoServer');
+
+
+
+
     vm.job_id = "XXX";
     vm.showToast = function(msg) {
       $mdToast.show(
@@ -298,13 +311,20 @@
       //	videosource.setAttribute('src', "" + videoElement.src);
 
     // var vttSource   = "http://ziller2.dyndns.org:9000/uploads/mp4/" +video.slice(0,-4) +'vtt';
-      var vttSource   = "http://ziller2.dyndns.org:8080/static/temp/" + video.slice(0,-4) +'vtt';
-      var videoSource = "http://ziller2.dyndns.org:9000/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
+      var vttSource   = "/static/temp/" + video.slice(0,-4) +'vtt';
 
-     //var videoSource = "http://ziller2.dyndns.org:8080/static/temp/upload_65e6ef6e312af1f62e78ef7e5c45285d.vtt";
 
-      //videoElement.src = str;
-      //alert(urlString);
+    //  var videoSource = "http://ziller2.dyndns.org:9000/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
+
+
+
+
+     // console.log("local video source is ",localVideoServer);
+
+      var videoSource = localVideoServer +"/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
+      //added alert to find video source
+      alert(videoSource);
+
       videosource.setAttribute('src', videoSource);
       videotrack.setAttribute('src', vttSource);
       videocontainer.load();
