@@ -3,3 +3,4 @@ coverage/
 .idea/
 .tmp/
 .publish/
+node_modules/
