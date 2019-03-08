@@ -323,6 +323,7 @@
 
       var videoSource = localVideoServer +"/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
       //added alert to find video source
+
       alert(videoSource);
 
       videosource.setAttribute('src', videoSource);
