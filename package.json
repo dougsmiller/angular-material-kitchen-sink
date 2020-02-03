@@ -2,6 +2,7 @@
   "name": "angularMaterialKitchenSink",
   "version": "0.0.0",
   "dependencies": {
+    "bower": "^1.8.8",
     "gulp-install": "^0.6.0"
   },
   "scripts": {
@@ -9,7 +10,7 @@
     "deploy-demo": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.3",
+    "browser-sync": "^2.26.7",
     "browser-sync-spa": "~1.0.3",
     "chalk": "~1.1.1",
     "del": "~2.0.2",
@@ -48,7 +49,7 @@
     "karma-phantomjs-launcher": "~0.2.1",
     "karma-phantomjs-shim": "~1.2.0",
     "lodash": "~3.10.1",
-    "main-bower-files": "^2.13.1",
+    "main-bower-files": "^2.13.3",
     "phantomjs": "~1.9.18",
     "uglify-save-license": "~0.4.1",
     "wiredep": "~2.2.2"

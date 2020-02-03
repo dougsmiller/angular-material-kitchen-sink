@@ -321,7 +321,8 @@
 
      // console.log("local video source is ",localVideoServer);
 
-      var videoSource = localVideoServer +"/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
+     var videoSource = "http://ziller2.dyndns.org:9000/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
+     //var videoSource = "/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
       //added alert to find video source
 
       alert(videoSource);
