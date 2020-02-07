@@ -316,11 +316,12 @@
     // var vttSource   = "http://ziller2.dyndns.org:9000/uploads/mp4/" +video.slice(0,-4) +'vtt';
       var vttSource   = "/static/temp/" + video.slice(0,-4) +'vtt';
 
-      alert("after sauce");
+      alert("after vttsource");
     //  var videoSource = "http://ziller2.dyndns.org:9000/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm"
      // console.log("local video source is ",localVideoServer);
 
      var videoSource = "https://gelosia.co.uk:9001/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
+     alert("after videosource");
      //var videoSource = "/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
       //added alert to find video source
 
