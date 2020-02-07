@@ -302,7 +302,7 @@
      */
     vm.showVideo = function(video) {
       vm.video = video;
-
+      alert("in show video");
 
       var videocontainer = document.getElementById('video-1');
       var videosource = document.getElementById('videoSrc');
