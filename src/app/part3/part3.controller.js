@@ -302,7 +302,7 @@
      */
     vm.showVideo = function(video) {
       vm.video = video;
-      alert("video: " + video );
+      
 
       var videocontainer = document.getElementById('video-1');
       var videosource = document.getElementById('videoSrc');
@@ -321,11 +321,11 @@
      // console.log("local video source is ",localVideoServer);
 
      var videoSource = "https://gelosia.co.uk:9001/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
-     alert("after videosource");
+     
      //var videoSource = "/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm";
       //added alert to find video source
 
-      alert(videoSource);
+      
 
       videosource.setAttribute('src', videoSource);
       videotrack.setAttribute('src', vttSource);
