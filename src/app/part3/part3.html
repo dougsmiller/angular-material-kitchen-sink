@@ -13,7 +13,7 @@
           <md-list-item md-virtual-repeat="item in part3.data" layout="row">
             <span ng-repeat-start="td in item"  ng-if="$first"> </span>
 
-            <span ng-repeat-end="td in item" ng-style="{width: 100/6 + '%'}" >{{td}} </span>
+            <span ng-repeat-end="td in item" ng-style="{width: 100/6 + '%'}" ng-if="!$first">{{td}} </span>
             
  <!--
           <span ng-repeat-start="td in item"  ng-if="$first"> </span>
