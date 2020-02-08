@@ -14,8 +14,9 @@
 
           <span ng-repeat-start="td in item"  ng-if="$first"> </span>
 
-            <span ng-repeat-end="td in item" ng-style="{width: 100/6 + '%'}" ng-if="!$first">{{td}} </span>
+            <span ng-repeat-end="td in item" ng-style="{width: 100/6 + '%'}" >{{td}} </span>
             <!--
+              <span ng-repeat-end="td in item" ng-style="{width: 100/6 + '%'}" ng-if="!$first">{{td}} </span>
             <md-button class="md-primary md-raised" ng-click="part3.selectVideo(item[0])">View</md-button>
             -->
             <md-button class="md-primary md-raised" ng-click="part3.showVideo(item[0])">View</md-button>

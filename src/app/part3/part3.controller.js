@@ -302,7 +302,7 @@
      */
     vm.showVideo = function(video) {
       vm.video = video;
-      alert("in show video");
+      alert("video");
 
       var videocontainer = document.getElementById('video-1');
       var videosource = document.getElementById('videoSrc');
@@ -310,13 +310,13 @@
 
 
       videocontainer.pause();
-      alert("after pause");
+     //alert("after pause");
       //	videosource.setAttribute('src', "" + videoElement.src);
 
     // var vttSource   = "http://ziller2.dyndns.org:9000/uploads/mp4/" +video.slice(0,-4) +'vtt';
       var vttSource   = "/static/temp/" + video.slice(0,-4) +'vtt';
 
-      alert("after vttsource");
+      //alert("after vttsource");
     //  var videoSource = "http://ziller2.dyndns.org:9000/uploads/" + video; //upload_7c36bd5526c330fe8a355e3a4322f0eb.webm"
      // console.log("local video source is ",localVideoServer);
 
